@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480" role="img" aria-labelledby="title desc">
+  <title id="title">LLM Hallucination</title>
+  <desc id="desc">A chat bubble with a confident but incorrect statement and a warning glitch effect.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0f1a" />
+      <stop offset="100%" stop-color="#1e2437" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7c4dff" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" rx="28" fill="url(#bg)" />
+  <rect x="24" y="24" width="752" height="432" rx="22" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" />
+
+  <g transform="translate(70 70)">
+    <rect x="0" y="0" width="520" height="220" rx="20" fill="rgba(124,77,255,0.18)" stroke="rgba(124,77,255,0.5)" />
+    <path d="M 120 220 L 160 220 L 130 265 Z" fill="rgba(124,77,255,0.18)" stroke="rgba(124,77,255,0.5)" />
+
+    <text x="28" y="60" font-family="'Inter', 'Segoe UI', sans-serif" font-size="22" fill="#cfd6ff">LLM:</text>
+    <text x="28" y="105" font-family="'Inter', 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#ffffff">"Пушкин — брат Лермонтова"</text>
+    <text x="28" y="150" font-family="'Inter', 'Segoe UI', sans-serif" font-size="18" fill="#b4beff">Источник: 100% уверенность</text>
+
+    <rect x="26" y="170" width="468" height="14" rx="7" fill="rgba(0,0,0,0.25)" />
+    <rect x="26" y="170" width="420" height="14" rx="7" fill="#7c4dff" opacity="0.7" />
+  </g>
+
+  <g transform="translate(610 88)">
+    <circle cx="70" cy="70" r="60" fill="rgba(255,87,87,0.12)" stroke="#ff5757" stroke-width="2" />
+    <path d="M 70 28 L 110 112 L 30 112 Z" fill="#ff5757" />
+    <rect x="66" y="58" width="8" height="28" fill="#0b0f1a" />
+    <rect x="66" y="92" width="8" height="8" fill="#0b0f1a" />
+    <text x="70" y="150" text-anchor="middle" font-family="'Inter', 'Segoe UI', sans-serif" font-size="14" fill="#ffb4b4">Факт не проверен</text>
+  </g>
+
+  <g opacity="0.7">
+    <rect x="70" y="330" width="660" height="36" rx="18" fill="url(#glow)" />
+    <text x="100" y="355" font-family="'Inter', 'Segoe UI', sans-serif" font-size="16" fill="#c7d2fe">Галлюцинация: правдоподобно звучит, но неверно</text>
+  </g>
+
+  <g opacity="0.35">
+    <rect x="88" y="38" width="160" height="8" fill="#6b6f83" />
+    <rect x="268" y="38" width="90" height="8" fill="#6b6f83" />
+    <rect x="374" y="38" width="130" height="8" fill="#6b6f83" />
+  </g>
+</svg>

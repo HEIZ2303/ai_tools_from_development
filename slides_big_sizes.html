@@ -38,10 +38,13 @@
             opacity: 0;
             transition: opacity 0.5s ease;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            pointer-events: none;
         }
 
         .slide.active {
             opacity: 1;
+            pointer-events: auto;
+            z-index: 1;
         }
 
         .slide-content {
@@ -70,6 +73,7 @@
             height: 100%;
             background: radial-gradient(circle at 50% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
             z-index: 1;
+            pointer-events: none;
         }
 
         .main-image {
@@ -97,6 +101,83 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .qr-card {
+            display: inline-flex;
+            align-items: center;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            border: 1px solid rgba(102, 126, 234, 0.25);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.18);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .qr-image {
+            width: 240px;
+            height: 240px;
+            padding: 10px;
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .closing-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 28px;
+            align-items: stretch;
+            margin-top: 30px;
+        }
+
+        .portrait-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 22px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(10px);
+            width: 100%;
+        }
+
+        .portrait-image {
+            width: 210px;
+            height: 210px;
+            border-radius: 18px;
+            object-fit: cover;
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+        }
+
+        .portrait-text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .portrait-title {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .portrait-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .closing-column {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 24px;
+            width: 100%;
         }
 
         .visual-card:hover {
@@ -130,6 +211,29 @@
             flex-wrap: wrap;
         }
 
+        .icon-container--hallucination {
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .icon-container--hallucination .icon-item {
+            width: 220px;
+            min-height: 140px;
+            justify-content: center;
+        }
+
+        .icon-container--hallucination .icon-item {
+            align-items: center;
+        }
+
+        .icon-container--hallucination .icon-item i {
+            margin-bottom: 10px;
+        }
+
+        .icon-align-fix {
+            transform: translateX(-4px);
+        }
+
         .icon-item {
             display: flex;
             flex-direction: column;
@@ -149,6 +253,13 @@
         .icon-item i {
             font-size: 3rem;
             color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .icon-image {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
             margin-bottom: 10px;
         }
 
@@ -173,6 +284,7 @@
             transform: translateX(-50%);
             display: flex;
             gap: 20px;
+            z-index: 3;
         }
 
         .nav-btn {
@@ -240,10 +352,109 @@
             width: 100%;
             max-width: 500px;
             height: 300px;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 10px;
             margin: 0 auto;
             display: block;
+        }
+
+        .risk-layout {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 30px;
+            align-items: stretch;
+            margin: 30px 0;
+        }
+
+        .risk-hero,
+        .risk-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .risk-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            min-height: 420px;
+        }
+
+        .risk-hero-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .risk-image {
+            width: 100%;
+            max-width: 520px;
+            height: 320px;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .risk-caption {
+            margin-top: 12px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .risk-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            height: 100%;
+        }
+
+        .risk-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            min-height: 190px;
+            text-align: center;
+        }
+
+        .risk-card i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .risk-card-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .prompt-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 10px 0 25px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .prompt-link a {
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.5);
+            color: #c7d2fe;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .prompt-link a:hover {
+            background: rgba(102, 126, 234, 0.35);
+            transform: translateY(-2px);
         }
 
         .flow-diagram {
@@ -313,6 +524,9 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin: 30px 0;
+        }
+        .tools-showcase.tools-showcase-23 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
         .tool-item {
@@ -499,6 +713,118 @@
             border-left: 10px solid #667eea;
             border-top: 5px solid transparent;
             border-bottom: 5px solid transparent;
+        }
+
+        .dev-flow-diagram {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 30px auto;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.03);
+        }
+
+        .dev-flow-node {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 18px 26px;
+            min-width: 240px;
+            text-align: center;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .dev-flow-node--wide {
+            min-width: 260px;
+        }
+
+        .dev-flow-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .dev-flow-title i {
+            font-size: 1.4rem;
+        }
+
+        .dev-icon--search {
+            color: #6aa8ff;
+        }
+
+        .dev-icon--learn {
+            color: #f5a623;
+        }
+
+        .dev-icon--test {
+            color: #5dd6c0;
+        }
+
+        .dev-icon--solve {
+            color: #7ddc6f;
+        }
+
+        .dev-flow-desc {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .dev-flow-row {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .dev-flow-arrow {
+            color: rgba(102, 126, 234, 0.9);
+            font-size: 2rem;
+        }
+
+        .dev-flow-arrow i {
+            font-size: 2.2rem;
+        }
+
+        .dev-flow-diagram--compact {
+            padding: 24px 20px;
+            margin: 18px auto;
+            gap: 16px;
+        }
+
+        .dev-flow-diagram--compact .dev-flow-node {
+            padding: 12px 16px;
+            min-width: 200px;
+        }
+
+        .dev-flow-diagram--compact .dev-flow-node--wide {
+            min-width: 220px;
+        }
+
+        .dev-flow-diagram--compact .dev-flow-title {
+            font-size: 1.05rem;
+        }
+
+        .dev-flow-diagram--compact .dev-flow-desc {
+            font-size: 0.85rem;
+        }
+
+        .dev-flow-diagram--compact .dev-flow-row {
+            gap: 16px;
+        }
+
+        .dev-flow-diagram--compact .dev-flow-arrow i {
+            font-size: 1.8rem;
         }
 
         .comparison-table {
@@ -1079,6 +1405,41 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
+        .workflow-diagram--compact {
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .workflow-diagram--compact .workflow-step {
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        .workflow-diagram--compact .workflow-step:hover {
+            transform: translateX(6px);
+        }
+
+        .workflow-diagram--compact .workflow-number {
+            width: 32px;
+            height: 32px;
+            margin-right: 12px;
+            font-size: 0.9rem;
+        }
+
+        .workflow-diagram--compact .workflow-title {
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .workflow-diagram--compact .workflow-desc {
+            font-size: 0.82rem;
+        }
+
+        .slide-title--compact {
+            font-size: 3rem;
+            margin-bottom: 22px;
+        }
+
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
@@ -1154,6 +1515,206 @@
             font-size: 0.85rem;
             color: #ffffff;
         }
+
+        .ai-class-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin: 20px 0 30px;
+        }
+
+        .ai-result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin: 30px 0 10px;
+        }
+
+        .ai-result-card {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            min-height: 320px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .ai-result-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: saturate(1.1);
+        }
+
+        .ai-result-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(10, 10, 10, 0.85) 100%);
+        }
+
+        .ai-result-content {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
+            z-index: 2;
+        }
+
+        .ai-result-label {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .ai-result-desc {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        .slide-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.75);
+            margin-top: -20px;
+            margin-bottom: 20px;
+        }
+
+        .embedding-map {
+            position: relative;
+            margin: 30px auto 10px;
+            padding: 28px 32px;
+            height: 380px;
+            border-radius: 24px;
+            background: radial-gradient(circle at 15% 70%, rgba(102, 126, 234, 0.12), transparent 55%),
+                        radial-gradient(circle at 85% 30%, rgba(34, 197, 94, 0.12), transparent 60%),
+                        rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.04);
+        }
+
+        .embedding-map::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+            background-size: 30px 30px, 70px 70px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .embedding-cluster {
+            position: absolute;
+            width: 240px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 2;
+        }
+
+        .embedding-cluster--marine {
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.25);
+        }
+
+        .embedding-cluster--tech {
+            box-shadow: 0 15px 35px rgba(34, 197, 94, 0.2);
+        }
+
+        .embedding-point {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #667eea;
+            box-shadow: 0 0 18px rgba(102, 126, 234, 0.7);
+            z-index: 3;
+        }
+
+        .embedding-point--tech {
+            background: #22c55e;
+            box-shadow: 0 0 18px rgba(34, 197, 94, 0.6);
+        }
+
+        .word-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            margin: 6px;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #ffffff;
+            background: rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+        }
+
+        .word-chip--tech {
+            background: rgba(34, 197, 94, 0.25);
+            border-color: rgba(34, 197, 94, 0.45);
+        }
+
+        .embedding-axis {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.25);
+            z-index: 1;
+        }
+
+        .embedding-axis-x {
+            left: 8%;
+            right: 8%;
+            top: 55%;
+            height: 2px;
+        }
+
+        .embedding-axis-y {
+            top: 10%;
+            bottom: 10%;
+            left: 50%;
+            width: 2px;
+        }
+
+        .axis-label {
+            position: absolute;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.55);
+            z-index: 2;
+        }
+
+        .axis-label--x {
+            right: 9%;
+            top: 57%;
+        }
+
+        .axis-label--y {
+            left: 51%;
+            top: 12%;
+        }
+
+        .embedding-caption {
+            text-align: center;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 18px;
+        }
+
+        .llm-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .llm-pillars .icon-item {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -1162,7 +1723,7 @@
     <div class="slide active">
         <div class="gradient-bg"></div>
         <div class="slide-content">
-            <h1 class="slide-title">AI в разработке ПО</h1>
+            <h1 class="slide-title">Инструменты ИИ в разработке</h1>
             <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=400&fit=crop" alt="AI Development" class="main-image">
             <div class="visual-card">
                 <i class="material-icons card-icon animated-element">smart_toy</i>
@@ -1183,23 +1744,22 @@
         <div class="gradient-bg"></div>
         <div class="slide-content">
             <h1 class="slide-title">Обо мне</h1>
-            <div class="image-grid">
-                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=300&h=200&fit=crop" alt="PHP Laravel" class="grid-image">
-                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop" alt="E-commerce" class="grid-image">
-                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=300&h=200&fit=crop" alt="AI Conference" class="grid-image">
-            </div>
             <div class="icon-container">
                 <div class="icon-item">
-                    <i class="material-icons">code</i>
-                    <span class="icon-label">5+ лет опыта</span>
+                    <i class="material-icons">badge</i>
+                    <span class="icon-label">PHP разработчик</span>
+                </div>
+                <div class="icon-item">
+                    <i class="material-icons">timeline</i>
+                    <span class="icon-label">Опыт 5+ лет</span>
                 </div>
                 <div class="icon-item">
                     <i class="material-icons">shopping_cart</i>
-                    <span class="icon-label">E-commerce</span>
+                    <span class="icon-label">E-commerce разработка</span>
                 </div>
                 <div class="icon-item">
-                    <i class="material-icons">psychology</i>
-                    <span class="icon-label">ИИ-коллега</span>
+                    <i class="material-icons">code</i>
+                    <span class="icon-label">Фреймворк Laravel</span>
                 </div>
             </div>
         </div>
@@ -1258,7 +1818,7 @@
             <div class="meme-container">
                 <div class="meme-box">
                     <div class="meme-text">Когда ищешь ошибку в Google</div>
-                    <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop" alt="Developer Frustrated" class="meme-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Tumbleweed_in_motion_s.gif" alt="Tumbleweed" class="meme-image">
                 </div>
             </div>
             <div class="flow-diagram">
@@ -1360,58 +1920,83 @@
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
-            <h1 class="slide-title">UML: Традиционный процесс</h1>
-            <div class="uml-diagram">
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <div class="uml-box" style="margin: 0 auto;">
-                        <strong>Developer</strong><br>
-                        <small>Actor</small>
+            <h1 class="slide-title slide-title--compact">UML: Традиционный процесс</h1>
+            <div class="dev-flow-diagram dev-flow-diagram--compact">
+                <div class="dev-flow-node dev-flow-node--wide">
+                    <div class="dev-flow-title">
+                        <i class="material-icons">person</i>
+                        Разработчик
+                    </div>
+                    <div class="dev-flow-desc">Сталкивается с проблемой</div>
+                </div>
+
+                <div class="dev-flow-arrow">
+                    <i class="material-icons">south</i>
+                </div>
+
+                <div class="dev-flow-row">
+                    <div class="dev-flow-node">
+                    <div class="dev-flow-title">
+                        <i class="material-icons dev-icon--search">search</i>
+                        Поиск
+                    </div>
+                        <div class="dev-flow-desc">Google, StackOverflow</div>
+                    </div>
+                    <div class="dev-flow-node">
+                    <div class="dev-flow-title">
+                        <i class="material-icons dev-icon--learn">menu_book</i>
+                        Изучение
+                    </div>
+                        <div class="dev-flow-desc">Документация, туториалы</div>
+                    </div>
+                    <div class="dev-flow-node">
+                    <div class="dev-flow-title">
+                        <i class="material-icons dev-icon--test">science</i>
+                        Тестирование
+                    </div>
+                        <div class="dev-flow-desc">Проб и ошибок</div>
                     </div>
                 </div>
 
-                <div style="display: flex; justify-content: space-around; margin: 40px 0;">
-                    <div class="uml-box">
-                        <strong>IDE</strong><br>
-                        <small>System</small>
-                    </div>
-                    <div class="uml-box">
-                        <strong>Google</strong><br>
-                        <small>External</small>
-                    </div>
-                    <div class="uml-box">
-                        <strong>StackOverflow</strong><br>
-                        <small>Database</small>
-                    </div>
+                <div class="dev-flow-arrow">
+                    <i class="material-icons">south</i>
                 </div>
 
-                <div class="workflow-diagram">
-                    <div class="workflow-step">
-                        <div class="workflow-number">1</div>
-                        <div class="workflow-content">
-                            <div class="workflow-title">Написание кода</div>
-                            <div class="workflow-desc">Разработчик пишет код в IDE</div>
-                        </div>
+                <div class="dev-flow-node dev-flow-node--wide">
+                    <div class="dev-flow-title">
+                        <i class="material-icons dev-icon--solve">check_circle</i>
+                        Решение
                     </div>
-                    <div class="workflow-step">
-                        <div class="workflow-number">2</div>
-                        <div class="workflow-content">
-                            <div class="workflow-title">Обнаружение ошибки</div>
-                            <div class="workflow-desc">IDE показывает ошибку или runtime exception</div>
-                        </div>
+                    <div class="dev-flow-desc">Через несколько часов</div>
+                </div>
+            </div>
+            <div class="workflow-diagram workflow-diagram--compact">
+                <div class="workflow-step">
+                    <div class="workflow-number">1</div>
+                    <div class="workflow-content">
+                        <div class="workflow-title">Написание кода</div>
+                        <div class="workflow-desc">Разработчик пишет код в IDE</div>
                     </div>
-                    <div class="workflow-step">
-                        <div class="workflow-number">3</div>
-                        <div class="workflow-content">
-                            <div class="workflow-title">Поиск решения</div>
-                            <div class="workflow-desc">Google → StackOverflow → Documentation</div>
-                        </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-number">2</div>
+                    <div class="workflow-content">
+                        <div class="workflow-title">Обнаружение ошибки</div>
+                        <div class="workflow-desc">IDE показывает ошибку или runtime exception</div>
                     </div>
-                    <div class="workflow-step">
-                        <div class="workflow-number">4</div>
-                        <div class="workflow-content">
-                            <div class="workflow-title">Адаптация решения</div>
-                            <div class="workflow-desc">Модификация найденного кода под проект</div>
-                        </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-number">3</div>
+                    <div class="workflow-content">
+                        <div class="workflow-title">Поиск решения</div>
+                        <div class="workflow-desc">Google → StackOverflow → Documentation</div>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-number">4</div>
+                    <div class="workflow-content">
+                        <div class="workflow-title">Адаптация решения</div>
+                        <div class="workflow-desc">Модификация найденного кода под проект</div>
                     </div>
                 </div>
             </div>
@@ -1427,7 +2012,122 @@
         </div>
     </div>
 
-    <!-- Слайд 7: Новая детальная схема LLM -->
+    <!-- Слайд 7: Классификация ИИ -->
+    <div class="slide">
+        <div class="gradient-bg"></div>
+        <div class="slide-content">
+            <h1 class="slide-title">Классификация ИИ</h1>
+            <div class="slide-subtitle">По уровню, подходу, автономности и типу результата</div>
+
+            <div class="ai-class-grid">
+                <div class="icon-item">
+                    <i class="material-icons">signal_cellular_alt</i>
+                    <span class="icon-label">Уровень возможностей</span>
+                </div>
+                <div class="icon-item">
+                    <i class="material-icons">device_hub</i>
+                    <span class="icon-label">Подход</span>
+                </div>
+                <div class="icon-item">
+                    <i class="material-icons">autorenew</i>
+                    <span class="icon-label">Автономность</span>
+                </div>
+                <div class="icon-item">
+                    <i class="material-icons">category</i>
+                    <span class="icon-label">Тип результата</span>
+                </div>
+            </div>
+
+            <div class="ai-result-grid">
+                <div class="ai-result-card">
+                    <img src="https://images.unsplash.com/photo-1545239351-ef35f43d514b?w=900&h=600&fit=crop" alt="Predictive AI" class="ai-result-image">
+                    <div class="ai-result-overlay"></div>
+                    <div class="ai-result-content">
+                        <div class="ai-result-label">Предсказательный ИИ</div>
+                        <div class="ai-result-desc">Классифицирует и прогнозирует: риск, спрос, цену</div>
+                    </div>
+                </div>
+                <div class="ai-result-card">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&h=600&fit=crop" alt="Generative AI" class="ai-result-image">
+                    <div class="ai-result-overlay"></div>
+                    <div class="ai-result-content">
+                        <div class="ai-result-label">Генеративный ИИ</div>
+                        <div class="ai-result-desc">Создаёт новый контент: текст, изображения, музыку, код</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">7</div>
+        <div class="navigation">
+            <button class="nav-btn" onclick="prevSlide()">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            <button class="nav-btn" onclick="nextSlide()">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Слайд 8: LLM обучение и эмбеддинги -->
+    <div class="slide">
+        <div class="gradient-bg"></div>
+        <div class="slide-content">
+            <h1 class="slide-title">LLM: обучение и эмбеддинги</h1>
+            <div class="slide-subtitle">Следующий токен + механизм внимания = пространство смыслов</div>
+
+            <div class="llm-pillars">
+                <div class="icon-item">
+                    <i class="material-icons">library_books</i>
+                    <span class="icon-label">Данные: книги, статьи, диалоги</span>
+                </div>
+                <div class="icon-item">
+                    <i class="material-icons">auto_awesome_motion</i>
+                    <span class="icon-label">Задача: предсказать следующий токен</span>
+                </div>
+                <div class="icon-item">
+                    <i class="material-icons">visibility</i>
+                    <span class="icon-label">Внимание: что важнее в контексте</span>
+                </div>
+            </div>
+
+            <div class="embedding-map">
+                <div class="embedding-axis embedding-axis-x"></div>
+                <div class="embedding-axis embedding-axis-y"></div>
+                <div class="axis-label axis-label--x">X</div>
+                <div class="axis-label axis-label--y">Y</div>
+
+                <div class="embedding-point" style="left: 20%; top: 65%;"></div>
+                <div class="embedding-point embedding-point--tech" style="left: 72%; top: 30%;"></div>
+
+                <div class="embedding-cluster embedding-cluster--marine" style="left: 8%; top: 62%;">
+                    <span class="word-chip">лодка</span>
+                    <span class="word-chip">корабль</span>
+                    <span class="word-chip">катер</span>
+                    <span class="word-chip">парус</span>
+                </div>
+
+                <div class="embedding-cluster embedding-cluster--tech" style="left: 60%; top: 22%;">
+                    <span class="word-chip word-chip--tech">сервер</span>
+                    <span class="word-chip word-chip--tech">диск</span>
+                    <span class="word-chip word-chip--tech">кабель</span>
+                    <span class="word-chip word-chip--tech">SSD</span>
+                </div>
+            </div>
+
+            <div class="embedding-caption">Близость вектора = смысловая близость</div>
+        </div>
+        <div class="slide-number">8</div>
+        <div class="navigation">
+            <button class="nav-btn" onclick="prevSlide()">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            <button class="nav-btn" onclick="nextSlide()">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Слайд 9: Новая детальная схема LLM -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -1516,7 +2216,7 @@
                 <div class="card-text">LLM работает с числовыми представлениями слов, а не с текстом напрямую</div>
             </div>
         </div>
-        <div class="slide-number">7</div>
+        <div class="slide-number">9</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -1527,73 +2227,7 @@
         </div>
     </div>
 
-    <!-- Слайд 8: Архитектура Трансформера -->
-    <div class="slide">
-        <div class="gradient-bg"></div>
-        <div class="slide-content">
-            <h1 class="slide-title">Архитектура Трансформера</h1>
-            <div class="architecture-diagram">
-                <div class="arch-layer">
-                    <div class="arch-component">
-                        <div class="arch-title">Input Embeddings</div>
-                        <div class="arch-desc">Токены → Векторы</div>
-                    </div>
-                    <div class="arch-component">
-                        <div class="arch-title">Positional Encoding</div>
-                        <div class="arch-desc">Позиция в последовательности</div>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin: 20px 0;">
-                    <i class="material-icons" style="color: #667eea; font-size: 2rem;">arrow_downward</i>
-                </div>
-
-                <div class="arch-layer">
-                    <div class="arch-component">
-                        <div class="arch-title">Multi-Head Attention</div>
-                        <div class="arch-desc">Внимание к разным частям</div>
-                    </div>
-                    <div class="arch-component">
-                        <div class="arch-title">Feed Forward</div>
-                        <div class="arch-desc">Нелинейная трансформация</div>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin: 20px 0;">
-                    <i class="material-icons" style="color: #667eea; font-size: 2rem;">arrow_downward</i>
-                </div>
-
-                <div class="arch-layer">
-                    <div class="arch-component">
-                        <div class="arch-title">Layer Norm</div>
-                        <div class="arch-desc">Нормализация</div>
-                    </div>
-                    <div class="arch-component">
-                        <div class="arch-title">Output</div>
-                        <div class="arch-desc">Следующие токены</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="highlight-box">
-                <div class="highlight-title">Ключевая инновация</div>
-                <div class="highlight-text">
-                    Self-Attention позволяет модели учитывать контекст всего предложения при обработке каждого слова
-                </div>
-            </div>
-        </div>
-        <div class="slide-number">8</div>
-        <div class="navigation">
-            <button class="nav-btn" onclick="prevSlide()">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            <button class="nav-btn" onclick="nextSlide()">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </div>
-    </div>
-
-    <!-- Слайд 9: Почему LLM галлюцинирует -->
+    <!-- Слайд 10: Почему LLM галлюцинирует -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -1601,12 +2235,12 @@
             <div class="meme-container">
                 <div class="meme-box">
                     <div class="meme-text">LLM: Пушкин — брат Лермонтова</div>
-                    <img src="https://images.unsplash.com/photo-1541746972996-8e2b691d1100?w=400&h=250&fit=crop" alt="AI Wrong Fact" class="meme-image">
+                    <img src="assets/slide9.png" alt="Пушкин и Лермонтов: гибрид" class="meme-image">
                 </div>
             </div>
-            <div class="icon-container">
+            <div class="icon-container icon-container--hallucination">
                 <div class="icon-item">
-                    <i class="material-icons">database</i>
+                    <i class="material-icons">storage</i>
                     <span class="icon-label">Нет БД фактов</span>
                 </div>
                 <div class="icon-item">
@@ -1619,7 +2253,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">9</div>
+        <div class="slide-number">10</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -1630,7 +2264,7 @@
         </div>
     </div>
 
-    <!-- Слайд 10: Механизм галлюцинаций -->
+    <!-- Слайд 11: Механизм галлюцинаций -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -1696,7 +2330,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">10</div>
+        <div class="slide-number">11</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -1707,7 +2341,7 @@
         </div>
     </div>
 
-    <!-- Слайд 11: Разработка с ИИ -->
+    <!-- Слайд 12: Разработка с ИИ -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -1725,7 +2359,7 @@
                 <div class="card-text">Формулируешь желание → ИИ генерирует решение</div>
             </div>
         </div>
-        <div class="slide-number">11</div>
+        <div class="slide-number">12</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -1736,7 +2370,7 @@
         </div>
     </div>
 
-    <!-- Слайд 12: AI vs Human сравнение -->
+    <!-- Слайд 13: AI vs Human сравнение -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -1792,7 +2426,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">12</div>
+        <div class="slide-number">13</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -1803,7 +2437,7 @@
         </div>
     </div>
 
-    <!-- Слайд 13: Пример вайбкодинга -->
+    <!-- Слайд 14: Пример вайбкодинга -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -1862,7 +2496,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">13</div>
+        <div class="slide-number">14</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -1873,7 +2507,7 @@
         </div>
     </div>
 
-    <!-- Слайд 14: MCP -->
+    <!-- Слайд 15: MCP -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -1911,7 +2545,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">14</div>
+        <div class="slide-number">15</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -1922,7 +2556,7 @@
         </div>
     </div>
 
-    <!-- Слайд 15: MCP архитектура -->
+    <!-- Слайд 16: MCP архитектура -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -1977,7 +2611,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">15</div>
+        <div class="slide-number">16</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -1988,7 +2622,7 @@
         </div>
     </div>
 
-    <!-- Слайд 16: MCP примеры -->
+    <!-- Слайд 17: MCP примеры -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -2037,7 +2671,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">16</div>
+        <div class="slide-number">17</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2048,7 +2682,37 @@
         </div>
     </div>
 
-    <!-- Слайд 17: ACP -->
+    <!-- Слайд 18: MCP сервер ВкусВилл -->
+    <div class="slide">
+        <div class="gradient-bg"></div>
+        <div class="slide-content">
+            <h1 class="slide-title">ВкусВилл MCP сервер</h1>
+            <div class="slide-subtitle">Агенты заказывают продукты напрямую через MCP</div>
+            <div class="visual-card" style="margin: 10px auto 0; max-width: 900px; text-align: center;">
+                <div class="card-title">3 инструмента MCP</div>
+                <div class="keyword-cloud" style="margin: 18px 0 0; justify-content: center;">
+                    <span class="keyword">vkusvill_products_search</span>
+                    <span class="keyword">vkusvill_product_details</span>
+                    <span class="keyword">vkusvill_cart_link_create</span>
+                </div>
+            </div>
+            <div class="stat-card" style="margin: 18px auto 0; max-width: 520px;">
+                <div class="stat-number">1,5 мин</div>
+                <div class="stat-label">8 вызовов тулов • 37 тыс. токенов</div>
+            </div>
+        </div>
+        <div class="slide-number">18</div>
+        <div class="navigation">
+            <button class="nav-btn" onclick="prevSlide()">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            <button class="nav-btn" onclick="nextSlide()">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Слайд 19: ACP -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -2084,7 +2748,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">17</div>
+        <div class="slide-number">19</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2095,7 +2759,7 @@
         </div>
     </div>
 
-    <!-- Слайд 18: ACP экосистема -->
+    <!-- Слайд 20: ACP экосистема -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -2147,7 +2811,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">18</div>
+        <div class="slide-number">20</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2158,17 +2822,20 @@
         </div>
     </div>
 
-    <!-- Слайд 19: Промптинг -->
+    <!-- Слайд 21: Промптинг -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
             <h1 class="slide-title">Промптинг</h1>
             <div class="meme-container">
                 <div class="meme-box">
-                    <div class="meme-text">Плохой: "сделай хорошо"</div>
-                    <div class="meme-text">Хороший: "Ты — senior Python dev"</div>
-                    <img src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=400&h=200&fit=crop" alt="Prompting Comparison" class="meme-image">
+                    <div class="meme-text">Плохой: "Сделай форму регистрации"</div>
+                    <div class="meme-text">Хороший: "Ты — senior frontend dev. Сделай форму регистрации на React с валидацией, 3 полями (email, пароль, подтверждение), текстами ошибок и кратким описанием логики."</div>
                 </div>
+            </div>
+            <div class="prompt-link">
+                <span>Тренировка промптинга:</span>
+                <a href="https://promptingguide.ai" target="_blank" rel="noopener noreferrer">promptingguide.ai</a>
             </div>
             <div class="tools-showcase">
                 <div class="tool-item">
@@ -2201,7 +2868,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">19</div>
+        <div class="slide-number">21</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2212,7 +2879,7 @@
         </div>
     </div>
 
-    <!-- Слайд 20: Продвинутый промптинг -->
+    <!-- Слайд 22: Продвинутый промптинг -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -2264,7 +2931,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">20</div>
+        <div class="slide-number">22</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2275,71 +2942,57 @@
         </div>
     </div>
 
-    <!-- Слайд 21: Инструменты -->
+    <!-- Слайд 23: Инструменты -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
             <h1 class="slide-title">Инструменты</h1>
-            <div class="tools-showcase">
+            <div class="tools-showcase tools-showcase-23">
                 <div class="tool-item">
                     <div class="tool-icon">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/DeepSeek_logo.svg" alt="DeepSeek">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/DeepSeek_logo.svg/960px-DeepSeek_logo.svg.png" alt="DeepSeek" onerror="this.onerror=null;this.src='https://api.iconify.design/simple-icons:deepseek.svg';">
                     </div>
                     <div class="tool-name">DeepSeek</div>
                     <div class="tool-type">Вебчат</div>
                 </div>
                 <div class="tool-item">
                     <div class="tool-icon">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="ChatGPT" onerror="this.onerror=null;this.src='assets/logos/chatgpt.svg';">
                     </div>
                     <div class="tool-name">ChatGPT</div>
-                    <div class="tool-type">Вебчат</div>
+                    <div class="tool-type">Вебчат + plugin IDE</div>
                 </div>
                 <div class="tool-item">
                     <div class="tool-icon">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Claude_AI_logo.svg" alt="Claude">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/anthropic.svg" alt="Claude" onerror="this.onerror=null;this.src='assets/logos/claude.svg';">
                     </div>
                     <div class="tool-name">Claude</div>
-                    <div class="tool-type">Вебчат</div>
+                    <div class="tool-type">Вебчат + cli</div>
                 </div>
                 <div class="tool-item">
                     <div class="tool-icon">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Cursor_logo.svg" alt="Cursor">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cursor.svg" alt="Cursor" onerror="this.onerror=null;this.src='assets/logos/cursor.svg';">
                     </div>
                     <div class="tool-name">Cursor</div>
                     <div class="tool-type">IDE</div>
                 </div>
                 <div class="tool-item">
                     <div class="tool-icon">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/VS_Code_Logo.svg" alt="VS Code">
+                        <img src="https://cline.bot/_next/image?q=75&url=%2Fassets%2Fbranding%2Fbrand%2FGeneral+Logos%2FBot%2FSVG%2FBOT_LIGHT.svg&w=384" alt="Cline">
                     </div>
                     <div class="tool-name">Cline</div>
-                    <div class="tool-type">IDE</div>
+                    <div class="tool-type">plugin IDE</div>
                 </div>
                 <div class="tool-item">
                     <div class="tool-icon">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/VS_Code_Logo.svg" alt="Zed">
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/zedindustries.svg" alt="Zed" onerror="this.onerror=null;this.src='assets/logos/zed.svg';">
                     </div>
                     <div class="tool-name">Zed</div>
                     <div class="tool-type">IDE</div>
                 </div>
             </div>
-            <div class="logo-container">
-                <div class="logo-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Stack_Overflow_icon.svg" alt="StackOverflow" class="logo">
-                    <span class="logo-label">StackOverflow</span>
-                </div>
-                <div class="logo-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="logo">
-                    <span class="logo-label">GitHub Copilot</span>
-                </div>
-                <div class="logo-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack" class="logo">
-                    <span class="logo-label">Slack AI</span>
-                </div>
-            </div>
         </div>
-        <div class="slide-number">21</div>
+        <div class="slide-number">23</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2350,7 +3003,7 @@
         </div>
     </div>
 
-    <!-- Слайд 22: Сравнение инструментов -->
+    <!-- Слайд 24: Сравнение инструментов -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -2375,8 +3028,8 @@
                 </tr>
                 <tr>
                     <td><strong>Cline</strong></td>
-                    <td>VS Code</td>
-                    <td>Файл</td>
+                    <td>Плагин</td>
+                    <td>Проект</td>
                     <td>$10/мес</td>
                     <td>Автономность</td>
                 </tr>
@@ -2403,29 +3056,8 @@
                 </tr>
                 </tbody>
             </table>
-
-            <div class="tech-stack">
-                <div class="tech-item">
-                    <div class="tech-icon">
-                        <i class="material-icons">code</i>
-                    </div>
-                    <div class="tech-name">Лучший для кода</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-icon">
-                        <i class="material-icons">chat</i>
-                    </div>
-                    <div class="tech-name">Лучший для чата</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-icon">
-                        <i class="material-icons">savings</i>
-                    </div>
-                    <div class="tech-name">Лучший бюджет</div>
-                </div>
-            </div>
         </div>
-        <div class="slide-number">22</div>
+        <div class="slide-number">24</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2436,38 +3068,38 @@
         </div>
     </div>
 
-    <!-- Слайд 23: Риски -->
+    <!-- Слайд 25: Риски -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
             <h1 class="slide-title">Риски</h1>
-            <div class="meme-container">
-                <div class="meme-box">
-                    <div class="meme-text">ИИ: Я уверен!</div>
-                    <div class="meme-text">Реальность: Это неправда</div>
-                    <img src="https://images.unsplash.com/photo-1541746972996-8e2b691d1100?w=400&h=250&fit=crop" alt="AI Confident Mistake" class="meme-image">
+            <div class="risk-layout">
+                <div class="risk-hero">
+                    <div class="risk-hero-title">AI Confident Mistake</div>
+                    <img src="assets/llm-hallucination.svg" alt="AI confident mistake illustration" class="risk-image">
+                    <div class="risk-caption">Уверенный ответ, который звучит правдоподобно, но неверен</div>
                 </div>
-            </div>
-            <div class="icon-container">
-                <div class="icon-item">
-                    <i class="material-icons">warning</i>
-                    <span class="icon-label">Ошибается уверенно</span>
-                </div>
-                <div class="icon-item">
-                    <i class="material-icons">gavel</i>
-                    <span class="icon-label">Ты отвечаешь</span>
-                </div>
-                <div class="icon-item">
-                    <i class="material-icons">security</i>
-                    <span class="icon-label">Безопасность данных</span>
-                </div>
-                <div class="icon-item">
-                    <i class="material-icons">trending_down</i>
-                    <span class="icon-label">Потеря навыков</span>
+                <div class="risk-gallery">
+                    <div class="risk-card">
+                        <i class="material-icons">warning</i>
+                        <div class="risk-card-label">Ошибается уверенно</div>
+                    </div>
+                    <div class="risk-card">
+                        <i class="material-icons">gavel</i>
+                        <div class="risk-card-label">Ты отвечаешь</div>
+                    </div>
+                    <div class="risk-card">
+                        <i class="material-icons">security</i>
+                        <div class="risk-card-label">Безопасность данных</div>
+                    </div>
+                    <div class="risk-card">
+                        <i class="material-icons">trending_down</i>
+                        <div class="risk-card-label">Потеря навыков</div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="slide-number">23</div>
+        <div class="slide-number">25</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2478,7 +3110,7 @@
         </div>
     </div>
 
-    <!-- Слайд 24: Матрица рисков -->
+    <!-- Слайд 26: Матрица рисков -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -2504,7 +3136,7 @@
             </div>
 
             <div class="highlight-box">
-                <div class="highlight-title">Митигация рисков</div>
+                <div class="highlight-title">Как минимизировать риски</div>
                 <div class="highlight-text">
                     • Обязательный code review<br>
                     • Автоматизированное тестирование<br>
@@ -2513,7 +3145,7 @@
                 </div>
             </div>
         </div>
-        <div class="slide-number">24</div>
+        <div class="slide-number">26</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2524,7 +3156,7 @@
         </div>
     </div>
 
-    <!-- Слайд 25: Будущее разработки -->
+    <!-- Слайд 27: Будущее разработки -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
@@ -2561,7 +3193,7 @@
             </div>
 
             <div class="stat-card">
-                <div class="stat-number">2025</div>
+                <div class="stat-number">2026</div>
                 <div class="stat-label">Год, когда 50% кода будет генерироваться ИИ</div>
             </div>
 
@@ -2570,7 +3202,7 @@
                 <div class="stat-label">Полностью автономные AI-разработчики</div>
             </div>
         </div>
-        <div class="slide-number">25</div>
+        <div class="slide-number">27</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2581,19 +3213,31 @@
         </div>
     </div>
 
-    <!-- Слайд 26: Заключение -->
+    <!-- Слайд 28: Заключение -->
     <div class="slide">
         <div class="gradient-bg"></div>
         <div class="slide-content">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=400&fit=crop" alt="AI Future" class="main-image">
-            <h1 class="slide-title">Спасибо за внимание!</h1>
+            <div class="closing-layout">
+                <div class="portrait-card">
+                    <img class="portrait-image" src="assets/author.png" alt="Speaker portrait">
+                    <div class="portrait-text">
+                        <div class="portrait-title">Павел Толпыго</div>
+                        <div class="portrait-subtitle">Связь в Telegram — ниже</div>
+                    </div>
+                </div>
+                <div class="closing-column">
+                    <div class="qr-card">
+                        <img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Ft.me%2Fheiz23" alt="QR to Telegram">
+                    </div>
+                </div>
+            </div>
             <div class="visual-card" style="margin-top: 30px;">
                 <i class="material-icons card-icon animated-element">smart_toy</i>
                 <div class="card-title">ИИ — инструмент, а не замена</div>
                 <div class="card-text">Используйте мудро</div>
             </div>
         </div>
-        <div class="slide-number">26</div>
+        <div class="slide-number">28</div>
         <div class="navigation">
             <button class="nav-btn" onclick="prevSlide()">
                 <i class="material-icons">arrow_back</i>
@@ -2617,7 +3261,7 @@
             }
 
             // Запускаем анимацию для слайда LLM
-            if (index === 6) {
+            if (index === 8) {
                 startLLMAnimation();
             }
         }

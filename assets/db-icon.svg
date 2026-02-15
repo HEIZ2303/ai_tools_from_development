@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title desc">
+  <title id="title">Database</title>
+  <desc id="desc">Classic database cylinder icon.</desc>
+  <defs>
+    <linearGradient id="db" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8ea0ff" />
+      <stop offset="100%" stop-color="#5f6de0" />
+    </linearGradient>
+  </defs>
+  <ellipse cx="24" cy="10" rx="14" ry="6" fill="url(#db)" />
+  <rect x="10" y="10" width="28" height="22" fill="url(#db)" />
+  <ellipse cx="24" cy="32" rx="14" ry="6" fill="url(#db)" />
+  <ellipse cx="24" cy="10" rx="14" ry="6" fill="none" stroke="rgba(0,0,0,0.2)" />
+  <ellipse cx="24" cy="32" rx="14" ry="6" fill="none" stroke="rgba(0,0,0,0.2)" />
+</svg>
