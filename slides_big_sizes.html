@@ -1715,6 +1715,115 @@
         .llm-pillars .icon-item {
             margin: 0;
         }
+
+        .presenter-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .presenter-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            color: #ffffff;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .presenter-btn:hover {
+            background: rgba(102, 126, 234, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .presenter-status {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 260px;
+            text-align: right;
+        }
+
+        .presenter-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            gap: 20px;
+            padding: 24px;
+            background: #0a0a0a;
+            z-index: 8;
+            align-items: stretch;
+        }
+
+        .presenter-pane {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow: hidden;
+            height: 100%;
+            min-height: 0;
+        }
+
+        .presenter-label {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .presenter-stage {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            min-height: 0;
+        }
+
+        .presenter-empty {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.1rem;
+        }
+
+        body.presenter-mode .presentation-container {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        body.presenter-mode .presenter-overlay {
+            display: grid;
+        }
+
+        body.audience-mode .presenter-controls,
+        body.audience-mode .presenter-overlay {
+            display: none;
+        }
+
+        body.audience-mode .navigation,
+        body.audience-mode .slide-number {
+            display: none !important;
+        }
+
+        @media (max-width: 900px) {
+            .presenter-overlay {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3298,12 +3407,39 @@
         </div>
     </div>
 
+</div>
+
+    <div class="presenter-overlay" aria-hidden="true">
+        <div class="presenter-pane">
+            <div class="presenter-label">Текущий слайд</div>
+            <div class="presenter-stage" id="presenter-current"></div>
+        </div>
+        <div class="presenter-pane">
+            <div class="presenter-label">Следующий слайд</div>
+            <div class="presenter-stage" id="presenter-next"></div>
+        </div>
+    </div>
+
+    <div class="presenter-controls">
+        <button class="presenter-btn" onclick="togglePresenterMode()">Режим докладчика</button>
+        <button class="presenter-btn" onclick="openPresenterScreen(false)">Экран для зрителей</button>
+        <div class="presenter-status" id="presenter-status"></div>
+    </div>
+
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         let animationInterval;
+        let presenterMode = false;
+        let presenterWindow = null;
+        const presenterCurrent = document.getElementById('presenter-current');
+        const presenterNext = document.getElementById('presenter-next');
+        const presenterStatus = document.getElementById('presenter-status');
+        const isAudience = window.location.hash === '#audience';
+        const syncKey = 'slides-current-index';
+        let syncChannel = null;
 
-        function showSlide(index) {
+        function showSlide(index, fromSync = false) {
             slides.forEach(slide => slide.classList.remove('active'));
             slides[index].classList.add('active');
             currentSlide = index;
@@ -3316,6 +3452,157 @@
             // Запускаем анимацию для слайда LLM
             if (index === 9) {
                 startLLMAnimation();
+            }
+
+            if (presenterMode) {
+                syncPresenterViews();
+            }
+
+            if (!fromSync && !isAudience) {
+                broadcastSlide(index);
+            }
+        }
+
+        function cleanPresenterClone(clone) {
+            clone.classList.remove('active');
+            clone.style.opacity = '1';
+            clone.style.position = 'relative';
+            clone.style.pointerEvents = 'none';
+            clone.querySelectorAll('.navigation').forEach(nav => nav.remove());
+            clone.querySelectorAll('.slide-number').forEach(number => number.remove());
+        }
+
+        function renderPresenterStage(stage, slideIndex) {
+            stage.innerHTML = '';
+            if (slideIndex >= slides.length) {
+                const empty = document.createElement('div');
+                empty.className = 'presenter-empty';
+                empty.textContent = 'Конец презентации';
+                stage.appendChild(empty);
+                return;
+            }
+
+            if (!stage.clientWidth || !stage.clientHeight) {
+                requestAnimationFrame(() => renderPresenterStage(stage, slideIndex));
+                return;
+            }
+
+            const clone = slides[slideIndex].cloneNode(true);
+            cleanPresenterClone(clone);
+            clone.style.width = window.innerWidth + 'px';
+            clone.style.height = window.innerHeight + 'px';
+
+            const scale = Math.min(
+                stage.clientWidth / window.innerWidth,
+                stage.clientHeight / window.innerHeight
+            );
+            clone.style.transform = `scale(${scale})`;
+            clone.style.transformOrigin = 'top left';
+            stage.appendChild(clone);
+        }
+
+        function syncPresenterViews() {
+            renderPresenterStage(presenterCurrent, currentSlide);
+            renderPresenterStage(presenterNext, currentSlide + 1);
+        }
+
+        async function openPresenterScreen(auto) {
+            if (presenterWindow && !presenterWindow.closed) {
+                return;
+            }
+
+            let shouldOpen = true;
+            if (auto && 'getScreenDetails' in window) {
+                try {
+                    const details = await window.getScreenDetails();
+                    shouldOpen = !details.screens || details.screens.length > 1;
+                } catch (error) {
+                    shouldOpen = true;
+                }
+            }
+
+            if (!shouldOpen) {
+                return;
+            }
+
+            const baseUrl = window.location.href.split('#')[0];
+            const presenterUrl = `${baseUrl}#audience`;
+            presenterWindow = window.open(presenterUrl, 'presenter-screen', 'popup,noopener,width=1280,height=720');
+            if (!presenterWindow) {
+                if (presenterStatus) {
+                    presenterStatus.textContent = 'Окно для зрителей заблокировано. Разрешите попапы.';
+                }
+                return;
+            }
+            if (presenterStatus) {
+                presenterStatus.textContent = '';
+            }
+
+            if (auto && 'getScreenDetails' in window) {
+                try {
+                    const details = await window.getScreenDetails();
+                    const externalScreen = details.screens.find(screen => !screen.isPrimary) || details.screens[1];
+                    if (externalScreen) {
+                        presenterWindow.moveTo(externalScreen.left + 50, externalScreen.top + 50);
+                        presenterWindow.resizeTo(externalScreen.width, externalScreen.height);
+                    }
+                } catch (error) {
+                    // Ignore positioning errors
+                }
+            }
+        }
+
+        function closePresenterWindow() {
+            if (presenterWindow && !presenterWindow.closed) {
+                presenterWindow.close();
+            }
+            presenterWindow = null;
+            if (presenterStatus) {
+                presenterStatus.textContent = '';
+            }
+        }
+
+        async function togglePresenterMode() {
+            presenterMode = !presenterMode;
+            document.body.classList.toggle('presenter-mode', presenterMode);
+            if (presenterMode) {
+                requestAnimationFrame(syncPresenterViews);
+                await openPresenterScreen(true);
+            } else {
+                closePresenterWindow();
+            }
+        }
+
+        function initSyncChannel() {
+            if ('BroadcastChannel' in window) {
+                syncChannel = new BroadcastChannel('slides-presenter-sync');
+                syncChannel.onmessage = (event) => {
+                    if (!isAudience || !event.data) return;
+                    if (typeof event.data.index === 'number') {
+                        showSlide(event.data.index, true);
+                    }
+                };
+            }
+
+            window.addEventListener('storage', (event) => {
+                if (!isAudience) return;
+                if (event.key !== syncKey || !event.newValue) return;
+                const nextIndex = Number(event.newValue);
+                if (!Number.isNaN(nextIndex)) {
+                    showSlide(nextIndex, true);
+                }
+            });
+        }
+
+        function broadcastSlide(index) {
+            if (syncChannel) {
+                syncChannel.postMessage({ index });
+            }
+            try {
+                localStorage.setItem(syncKey, String(index));
+                localStorage.setItem('slides-current-ts', String(Date.now()));
+            } catch (error) {
+                // Ignore storage errors
             }
         }
 
@@ -3404,13 +3691,29 @@
         }
 
         // Клавиатурная навигация
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
+        if (!isAudience) {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') nextSlide();
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key.toLowerCase() === 'p') togglePresenterMode();
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            if (presenterMode) {
+                syncPresenterViews();
+                syncPresenterWindow();
+            }
         });
 
-        // Инициализация первого слайда
-        showSlide(0);
+        initSyncChannel();
+        if (isAudience) {
+            document.body.classList.add('audience-mode');
+            const initialIndex = Number(localStorage.getItem(syncKey));
+            showSlide(Number.isNaN(initialIndex) ? 0 : initialIndex, true);
+        } else {
+            showSlide(0);
+        }
     </script>
 </body>
 </html>
